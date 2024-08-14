@@ -21,4 +21,8 @@ from gerenciador_industriawayne import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cadastrar_equipamento/', views.cadastrar_equipamento),
+    path('processar_cadastro/', views.processar_cadastro, name='processar_cadastro'),
+    path('equipamentos/', views.listar_equipamentos, name='listar_equipamentos'),
 ]
+
+
