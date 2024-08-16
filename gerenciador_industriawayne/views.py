@@ -3,6 +3,9 @@ from django.http import HttpResponse
 from .models import Equipamentos
 
 
+def home(request):
+    return render(request, 'gerenciador_industriawayne/base.html')
+
 def cadastrar_equipamento(request):
     return render(request, 'gerenciador_industriawayne/cadastrar_equipamento.html')
 

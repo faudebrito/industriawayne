@@ -17,12 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from gerenciador_industriawayne import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
+    path('', views.home, name = 'home'),
     path('admin/', admin.site.urls),
     path('cadastrar_equipamento/', views.cadastrar_equipamento),
     path('processar_cadastro/', views.processar_cadastro, name='processar_cadastro'),
     path('equipamentos/', views.listar_equipamentos, name='listar_equipamentos'),
-]
-
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
