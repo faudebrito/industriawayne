@@ -1,0 +1,49 @@
+{% extends 'gerenciador_industriawayne/base.html' %}
+
+{% block title %}Lista de Inimigos{% endblock %}
+
+{% block content %}
+<h1>Lista de Inimigos</h1>
+    
+{% if inimigos %}
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nome do inimigo</th>
+                    <th>Sexo</th>
+                    <th>Super poder</th>
+                    <th>Armas</th>
+                    <th>Grau de perigo</th>
+                    <th>Descrição</th>
+                    <th>Capturado</th>
+                    <th>Data de Captura</th>
+                    <th>Localização</th>
+                    <!-- <th>Imagem</th> -->
+                </tr>
+            </thead>
+<tbody>
+    {% for inimigo in inimigos %}
+        <tr>
+            <td>{{ inimigo.id }}</td>
+            <td>{{ inimigo.nome_inimigo }}</td>
+            <td>{{ inimigo.sexo }}</td>
+            <td>{{ inimigo.super_poder }}</td>
+            <td>{{ inimigo.armas }}</td>
+            <td>{{ inimigo.grau_de_perigo }}</td>
+            <td>{{ inimigo.descricao }}</td>
+            <td>{{ inimigo.capturado }}</td> 
+            <td>{{ inimigo.data_captura }}</td>
+            <td>{{ inimigo.localizacao }}</td>                    
+        </tr>
+    {% endfor %}
+</tbody>
+        </table>
+</div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            Nenhum inimigo cadastrado.
+        </div>
+    {% endif %}
+{% endblock %}

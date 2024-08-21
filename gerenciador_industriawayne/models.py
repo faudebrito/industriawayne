@@ -13,10 +13,16 @@ class Equipamentos(models.Model):
 
 class Inimigos(models.Model):
     id = models.AutoField(primary_key=True)
-    nome = models.CharField(max_length=100)
-    super_poder = models.CharField(max_length=100)
-    grau_de_perigo = models.CharField(max_length=50)
+    nome_inimigo = models.CharField(max_length=100, default=None)
+    sexo = models.CharField(max_length=50, default=None)
+    super_poder = models.CharField(max_length=100, default=None)
+    armas = models.CharField(max_length=50, default=None)
+    grau_de_perigo = models.CharField(max_length=50, default=None)
+    descricao = models.CharField(max_length=500, default=None)
     capturado = models.BooleanField(default=False)
+    data_captura = models.DateField(default=datetime.datetime.now)
+    localizacao = models.CharField(max_length=50, default=None)
+
     # imagem = models.CharField(max_length=100)
 
 

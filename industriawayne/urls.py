@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from gerenciador_industriawayne import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -23,8 +23,12 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', views.home, name = 'home'),
     path('admin/', admin.site.urls),
-    path('cadastrar_equipamento/', views.cadastrar_equipamento),
+    path('configuracao/', include('usuarios.urls')),
+    path('cadastrar_equipamento/', views.cadastrar_equipamento, name='cadastrar_equipamento'),
+    path('cadastrar_inimigos/', views.cadastrar_inimigos, name='cadastrar_inimigos'),
     path('processar_cadastro/', views.processar_cadastro, name='processar_cadastro'),
     path('equipamentos/', views.listar_equipamentos, name='listar_equipamentos'),
+    path('processar_cadastro_inimigos/', views.processar_cadastro_inimigos, name='processar_cadastro_inimigos'),
+    path('inimigos/', views.listar_inimigos, name='listar_inimigos'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

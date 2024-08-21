@@ -41,11 +41,18 @@ footer p {
 h1 {
     color: #FFFF00;
 }
-
 h2, h3, h4, h5, h6 {
     color: #FFFF00;
 }
 
+label {
+    color:#FFFF00;
+}
+
 .table {
     background-color: #ffffff; /* Branco */
+}
+
+.table-responsive h2{
+    color: #FFFF00;
 }
