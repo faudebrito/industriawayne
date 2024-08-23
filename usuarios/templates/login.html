@@ -1,18 +1,34 @@
 {% extends 'gerenciador_industriawayne/base.html' %}
 
-{% block title %}Cadastro de Equipamentos{% endblock %}
+{% block title %}Login de Usuários{% endblock %}
 
 {% block content %}
 
-<form action="{% url 'login' %}" method="POST" >{% csrf_token %}
-    <input type="text" placeholder="username: " name="username">
-    <br>
-    <br>
-    <input type="password" placeholder="senha: " name="senha">
-    <br>
-    <br>
-    <input type="submit" value="Logar">
-    <br>
-    <br>
-</form>
+<head>
+</head>
+
+<body>
+
+    <div class="table-responsive">
+
+        <h2> Login de Usuários no Sistema </h2>
+
+        <form action="{% url 'login' %}" method="POST" >{% csrf_token %}
+
+            <label> Nome do usuário: </label>
+            <input type="text" placeholder="username: " name="username">
+            <br>
+            <br>
+
+            <label> Senha: </label>
+            <input type="password" placeholder="senha: " name="senha">
+            <br>
+            <br>
+            <input type="submit" value="Logar">
+            <br>
+            <br>
+        </form>
+       
+    </div>
+</body>
 {% endblock %}

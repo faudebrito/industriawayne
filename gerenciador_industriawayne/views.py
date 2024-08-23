@@ -54,6 +54,7 @@ class editar_equipamento(UpdateView):
         # messages.success(self.request, 'Equipamento atualizado com sucesso!')
         return super().form_valid(form)
 
+@login_required(login_url='/configuracao/login')
 def remover_equipamento(request, equipamento_id):
     equipamento = get_object_or_404(Equipamentos, id=equipamento_id)
     
@@ -95,3 +96,23 @@ def processar_cadastro_inimigos(request):
 def listar_inimigos(request):
     inimigos = Inimigos.objects.all()  # Recupera todos os equipamentos do banco de dados
     return render(request, 'gerenciador_industriawayne/listar_inimigos.html', {'inimigos': inimigos})
+
+class editar_inimigo(UpdateView):
+    model = Inimigos
+    fields = ['nome_inimigo', 'sexo', 'super_poder', 'armas', 'grau_de_perigo', 'descricao', 'capturado','data_captura','localizacao']
+    template_name = 'gerenciador_industriawayne/editar_inimigo.html'
+    success_url = reverse_lazy('listar_inimigos')  # Redireciona para a lista após edição
+
+    def form_valid(self, form):
+        # messages.success(self.request, 'Inimigo atualizado com sucesso!')
+        return super().form_valid(form)
+
+@login_required(login_url='/configuracao/login')
+def remover_inimigo(request, inimigo_id):
+    inimigo = get_object_or_404(Inimigos, id=inimigo_id)
+    
+    if request.method == 'POST':
+        inimigo.delete()
+        return redirect('listar_inimigos')  # Redireciona para a lista de inimigos após exclusão
+    
+    return render(request, 'gerenciador_industriawayne/remover_inimigo.html', {'inimigo': inimigo})

@@ -1,6 +1,6 @@
 {% extends 'gerenciador_industriawayne/base.html' %}
 
-{% block title %}Cadastro de Equipamentos{% endblock %}
+{% block title %}Cadastro de Usuários{% endblock %}
 
 {% block content %}
 
@@ -8,20 +8,44 @@
 </head>
 
 <body>
-            <form action="{% url 'cadastro' %}" method="POST" >{% csrf_token %}
-                <input type="text" placeholder="username: " name="username">
-                <br>
-                <br>
-                <input type="email" placeholder="Email: " name="email">
-                <br>
-                <br>
-                <input type="password" placeholder="senha: " name="senha">
-                <br>
-                <br>
-                <input type="submit" value="Cadastrar">
-                <br>
-                <br>
-            </form>
 
+    <div class="table-responsive">
+
+        <h2> Cadastro de Usuários no Sistema </h2>
+
+        <form action="{% url 'cadastro' %}" method="POST" >{% csrf_token %}
+
+            <label> Nome do usuário: </label>
+            <input type="text" placeholder="username: " name="username">
+            <br>
+            <br>
+
+            <label> Email: </label>
+            <input type="email" placeholder="Email: " name="email">
+            <br>
+            <br>
+
+
+            <label> Senha: </label>
+            <input type="password" placeholder="senha: " name="senha">
+            <br>
+            <br>
+            
+            <input type="submit" value="Cadastrar">
+            <br>
+            <br>
+        </form>
+
+    </div>
+    
 </body>
 {% endblock %}
+    
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
+if ('{{mensagem}}' == ''){
+    console.log('')
+} else {
+    alert('{{mensagem}}')
+}
+</script> -->

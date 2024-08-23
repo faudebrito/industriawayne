@@ -20,7 +20,7 @@ def cadastro(request):
         else:
             user = User.objects.create_user(username=username, email=email, password=senha)
             user.save()    
-            return HttpResponse('Usuario Cadastrado com sucesso.')
+            return HttpResponse('Usuário Cadastrado com sucesso.')
 
 def login(request):
     if request.method == 'GET':
