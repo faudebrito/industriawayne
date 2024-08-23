@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Equipamentos
-from .models import Inimigos
+from .models import Equipamentos, Inimigos
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
+from django.views.generic.edit import UpdateView
 
 
 def home(request):
@@ -36,12 +37,31 @@ def processar_cadastro(request):
     
     equipamento.save()
 
-    return HttpResponse("Equipamento salvo com sucesso!")
+    return render(request, 'gerenciador_industriawayne/cadastrar_equipamento.html', {'mensagem':'Equipamento salvo com sucesso.'})
 
 @login_required(login_url='/configuracao/login')
 def listar_equipamentos(request):
     equipamentos = Equipamentos.objects.all()  # Recupera todos os equipamentos do banco de dados
     return render(request, 'gerenciador_industriawayne/listar_equipamentos.html', {'equipamentos': equipamentos})
+
+class editar_equipamento(UpdateView):
+    model = Equipamentos
+    fields = ['nome', 'descricao', 'data', 'usuario_atual','status', 'localizacao']
+    template_name = 'gerenciador_industriawayne/editar_equipamento.html'
+    success_url = reverse_lazy('listar_equipamentos')  # Redireciona para a lista após edição
+
+    def form_valid(self, form):
+        # messages.success(self.request, 'Equipamento atualizado com sucesso!')
+        return super().form_valid(form)
+
+def remover_equipamento(request, equipamento_id):
+    equipamento = get_object_or_404(Equipamentos, id=equipamento_id)
+    
+    if request.method == 'POST':
+        equipamento.delete()
+        return redirect('listar_equipamentos')  # Redireciona para a lista de equipamentos após exclusão
+    
+    return render(request, 'gerenciador_industriawayne/remover_equipamento.html', {'equipamento': equipamento})
 
 @login_required(login_url='/configuracao/login')
 def processar_cadastro_inimigos(request):
