@@ -38,6 +38,7 @@ def processar_cadastro(request):
     equipamento.save()
 
     return render(request, 'gerenciador_industriawayne/cadastrar_equipamento.html', {'mensagem':'Equipamento salvo com sucesso.'})
+    success_url = reverse_lazy('cadastrar_equipamentos')
 
 @login_required(login_url='/configuracao/login')
 def listar_equipamentos(request):

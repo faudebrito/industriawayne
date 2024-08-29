@@ -31,13 +31,16 @@ def login(request):
         senha = request.POST.get('senha')
 
         user = authenticate(username=username, password=senha)
+        
         if user:
 
             login_django(request, user)
-            return HttpResponse('AUTENTICADO')
+            return render(request, 'alerta-autenticado.html')
+            
         else:
-            return HttpResponse('Credenciais incorretas')
+            return render(request, 'alerta-usuario-nao-encontrado.html')
 
 def logout_view(request):
     logout(request)  # Encerra a sessão do usuário
-    return redirect('login') 
+    # return redirect('logout')
+    return render(request, 'logout.html')
