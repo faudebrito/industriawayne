@@ -23,7 +23,7 @@ class Inimigos(models.Model):
     capturado = models.BooleanField(default=False)
     data_captura = models.DateField(default=datetime.datetime.now)
     localizacao = models.CharField(max_length=50, default=None)
-    # imagem = models.ImageField(upload_to="", null = True, blank=True)
+    imagem = models.ImageField(upload_to="static/gerenciador_industriawayne/css/images", null = True, blank=True)
 
 # class Expense(TimeStampedModel):
 #     photo = models.ImageField(upload_to="", null = True, blank=True)

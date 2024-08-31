@@ -7,17 +7,17 @@ from django.views.generic.edit import UpdateView
 
 
 def home(request):
-    return render(request, 'gerenciador_industriawayne/base.html')
+    return render(request, 'gerenciador_industriawayne/home.html')
 
-@login_required(login_url='/configuracao/login')
+@login_required(login_url='/login/login')
 def cadastrar_equipamento(request):
     return render(request, 'gerenciador_industriawayne/cadastrar_equipamento.html')
 
-@login_required(login_url='/configuracao/login')
+@login_required(login_url='/login/login')
 def cadastrar_inimigos(request):
     return render(request, 'gerenciador_industriawayne/cadastrar_inimigos.html')
 
-@login_required(login_url='/configuracao/login')
+@login_required(login_url='/login/login')
 def processar_cadastro(request):
     nome=request.POST.get('nome')
     descricao=request.POST.get('descricao')
@@ -40,7 +40,7 @@ def processar_cadastro(request):
     return render(request, 'gerenciador_industriawayne/cadastrar_equipamento.html', {'mensagem':'Equipamento salvo com sucesso.'})
     success_url = reverse_lazy('cadastrar_equipamentos')
 
-@login_required(login_url='/configuracao/login')
+@login_required(login_url='/login/login')
 def listar_equipamentos(request):
     equipamentos = Equipamentos.objects.all()  # Recupera todos os equipamentos do banco de dados
     return render(request, 'gerenciador_industriawayne/listar_equipamentos.html', {'equipamentos': equipamentos})
@@ -55,7 +55,7 @@ class editar_equipamento(UpdateView):
         # messages.success(self.request, 'Equipamento atualizado com sucesso!')
         return super().form_valid(form)
 
-@login_required(login_url='/configuracao/login')
+@login_required(login_url='/login/login')
 def remover_equipamento(request, equipamento_id):
     equipamento = get_object_or_404(Equipamentos, id=equipamento_id)
     
@@ -65,7 +65,7 @@ def remover_equipamento(request, equipamento_id):
     
     return render(request, 'gerenciador_industriawayne/remover_equipamento.html', {'equipamento': equipamento})
 
-@login_required(login_url='/configuracao/login')
+@login_required(login_url='/login/login')
 def processar_cadastro_inimigos(request):
     nome_inimigo=request.POST.get('nome_inimigo')
     sexo=request.POST.get('sexo')
@@ -93,7 +93,7 @@ def processar_cadastro_inimigos(request):
 
     return HttpResponse("Inimigo salvo com sucesso!")
 
-@login_required(login_url='/configuracao/login')
+@login_required(login_url='/login/login')
 def listar_inimigos(request):
     inimigos = Inimigos.objects.all()  # Recupera todos os equipamentos do banco de dados
     return render(request, 'gerenciador_industriawayne/listar_inimigos.html', {'inimigos': inimigos})
@@ -108,7 +108,7 @@ class editar_inimigo(UpdateView):
         # messages.success(self.request, 'Inimigo atualizado com sucesso!')
         return super().form_valid(form)
 
-@login_required(login_url='/configuracao/login')
+@login_required(login_url='/login/login')
 def remover_inimigo(request, inimigo_id):
     inimigo = get_object_or_404(Inimigos, id=inimigo_id)
     

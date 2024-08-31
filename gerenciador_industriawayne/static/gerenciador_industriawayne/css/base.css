@@ -10,6 +10,7 @@ body {
     /* background-color: #1c1c1c; Cor de fundo para complementar */
     color: #f5f5f5; /* Texto branco suave */
     font-family: Arial, sans-serif;
+    
 }
 
 .navbar {
@@ -23,11 +24,12 @@ body {
 .container{
     margin-top: 80px;
     margin-bottom: 20px;
-    height: 400px;
+    height: 700px;
 
 }
 
 footer {
+    margin-top: 80px;
     background-color: #343a40; /* Cinza escuro */
     color: #FFFF00; /* Branco */
     padding: 80px;
