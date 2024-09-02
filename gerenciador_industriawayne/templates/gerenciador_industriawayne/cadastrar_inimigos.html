@@ -12,75 +12,9 @@
 
         <h2> Cadastro de Inimigos </h2>
 
-        <form action="{% url 'processar_cadastro_inimigos'%}" method="POST">{% csrf_token %}
+        <form action="{% url 'cadastrar_inimigos'%}" method="POST" enctype="multipart/form-data">{% csrf_token %}
 
-            <label> Nome do Inimigo: </label>
-            <input type="text" name="nome_inimigo" id="">
-            <br />
-            <br />
-        
-            <label> Sexo: </label>
-            <select name="sexo">
-                <option value="Masculino">Masculino</option>
-                <option value="Feminino">Feminino</option>
-                <option value="Indefinido">Indefinido</option>
-                <option value="Alienígena">Alienígena</option>
-            </select>
-            <br />
-            <br />
-
-            <label> Super Poder: </label>
-            <input type="text" name="super_poder" id="">
-            <br />
-            <br />
-
-            <label> Armas: </label>
-            <input type="text" name="armas" id="">
-            <br />
-            <br />
-
-            <label> Grau de Perigo: </label>
-            <select name="grau_de_perigo">
-                <option value="baixa_periculosidade">Baixa Periculosidade</option>
-                <option value="media_periculosidade">Média Periculosidade</option>
-                <option value="alta_periculosidade">Alta Periculosidade</option>
-            </select>
-
-            <br />
-            <br />
-
-            <label> Descrição: </label>
-            <input type="text" name="descricao" id="">
-            <br />
-            <br />
-
-            <label> Capturado? </label>
-            <select name="capturado">
-                <option value=True>Sim</option>
-                <option value=False>Não</option>
-            </select>
-
-            <label> Data de Captura: </label>
-            <input type="date" name="data_captura" id="" required>
-            <br />
-            <br />
-
-            <label> Localização: </label>
-            <input type="text" name="localizacao" id="">
-            <br />
-            <br />
-
-            <!-- <label> Imagem: </label>
-           
-            {% load widget_tweaks %}
-            {% render_field form.photo class="form-control" %}
-            {{ form.errors.photo }}
-
-            {% for error in form.non_field_errors %}
-            <p class="text-danger">{{ error }}</p>
-            {% endfor %}
-            <br />
-            <br /> -->
+            {{form.as_p}}
 
             <input type="submit" value="Enviar">
         

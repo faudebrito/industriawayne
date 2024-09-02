@@ -4,7 +4,7 @@ from .models import Equipamentos, Inimigos
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.views.generic.edit import UpdateView
-
+from .forms import InimigosForms
 
 def home(request):
     return render(request, 'gerenciador_industriawayne/home.html')
@@ -15,7 +15,10 @@ def cadastrar_equipamento(request):
 
 @login_required(login_url='/login/login')
 def cadastrar_inimigos(request):
-    return render(request, 'gerenciador_industriawayne/cadastrar_inimigos.html')
+    form = InimigosForms(request.POST, request.FILES)
+    if form.is_valid():
+        form.save()
+    return render(request, 'gerenciador_industriawayne/cadastrar_inimigos.html', {'form': form})
 
 @login_required(login_url='/login/login')
 def processar_cadastro(request):
@@ -65,35 +68,9 @@ def remover_equipamento(request, equipamento_id):
     
     return render(request, 'gerenciador_industriawayne/remover_equipamento.html', {'equipamento': equipamento})
 
-@login_required(login_url='/login/login')
-def processar_cadastro_inimigos(request):
-    nome_inimigo=request.POST.get('nome_inimigo')
-    sexo=request.POST.get('sexo')
-    super_poder=request.POST.get('super_poder')
-    armas=request.POST.get('armas')
-    grau_de_perigo=request.POST.get('grau_de_perigo')
-    descricao=request.POST.get('descricao')
-    capturado=request.POST.get('capturado')
-    data_captura=request.POST.get('data_captura')
-    localizacao=request.POST.get('localizacao')
-
-    inimigo = Inimigos(
-        nome_inimigo=nome_inimigo,
-        sexo=sexo,
-        super_poder=super_poder,
-        armas=armas,
-        grau_de_perigo=grau_de_perigo,
-        descricao=descricao,
-        capturado=capturado,
-        data_captura=data_captura,
-        localizacao=localizacao,
-        )
-    
-    inimigo.save()
-
-    return HttpResponse("Inimigo salvo com sucesso!")
 
 @login_required(login_url='/login/login')
+
 def listar_inimigos(request):
     inimigos = Inimigos.objects.all()  # Recupera todos os equipamentos do banco de dados
     return render(request, 'gerenciador_industriawayne/listar_inimigos.html', {'inimigos': inimigos})

@@ -63,3 +63,13 @@ label {
     font-family: Arial, sans-serif;
     display:flexbox
 }
+
+#message_usuario {
+    width: 430px;
+
+}
+
+form ul {
+    display:none
+
+}

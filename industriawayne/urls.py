@@ -30,7 +30,6 @@ urlpatterns = [
     path('equipamentos/', views.listar_equipamentos, name='listar_equipamentos'),
     path('equipamentos/remover/<int:equipamento_id>/', views.remover_equipamento, name='remover_equipamento'),
     path('equipamentos/editar/<int:pk>/', views.editar_equipamento.as_view(), name='editar_equipamento'),
-    path('processar_cadastro_inimigos/', views.processar_cadastro_inimigos, name='processar_cadastro_inimigos'),
     path('inimigos/', views.listar_inimigos, name='listar_inimigos'),
     path('inimigos/remover/<int:inimigo_id>/', views.remover_inimigo, name='remover_inimigo'),
     path('inimigos/editar/<int:pk>/', views.editar_inimigo.as_view(), name='editar_inimigo')

@@ -1,6 +1,5 @@
 from django.db import models
 import datetime
-# from backend.core.models import TimeStampedModel
 
 class Equipamentos(models.Model):
     id = models.AutoField(primary_key=True)
@@ -10,7 +9,7 @@ class Equipamentos(models.Model):
     usuario_atual=models.CharField(max_length=100)
     status = models.CharField(max_length=50)
     localizacao = models.CharField(max_length=50, default=None)
-    # imagem = models.CharField(max_length=100)
+    # imagem = models.ImageField(upload_to="static/gerenciador_industriawayne/css/images", null = True, blank=True)
 
 class Inimigos(models.Model):
     id = models.AutoField(primary_key=True)
@@ -23,8 +22,7 @@ class Inimigos(models.Model):
     capturado = models.BooleanField(default=False)
     data_captura = models.DateField(default=datetime.datetime.now)
     localizacao = models.CharField(max_length=50, default=None)
-    imagem = models.ImageField(upload_to="static/gerenciador_industriawayne/css/images", null = True, blank=True)
+    # imagem = models.ImageField(upload_to="static/gerenciador_industriawayne/css/images", null = True, blank=True)
+    imagem = models.ImageField(upload_to= "images/", null = True, blank=True)
 
-# class Expense(TimeStampedModel):
-#     photo = models.ImageField(upload_to="", null = True, blank=True)
 

@@ -1,7 +1,30 @@
 from django import forms
-from .models import Expense 
+from .models import Inimigos 
 
-class ExpenseForm(forms.ModelForm):
+class InimigosForms(forms.ModelForm):
     class Meta:
-        model=Expense
-        fields=("photo")
+        model=Inimigos
+        fields=(
+            "nome_inimigo",
+            "sexo",
+            "super_poder",
+            "armas",
+            "grau_de_perigo",
+            "descricao",
+            "capturado",
+            "data_captura",
+            "localizacao",
+            "imagem",
+        )
+        labels = {
+            "nome_inimigo": "Nome do inimigo ",
+            "sexo": "sexo: ",
+            "super_poder": "Super_poder: ",
+            "armas": "Armas: ",
+            "grau_de_perigo": "Grau de perigo: ",
+            "descricao": "Descricao: ",
+            "capturado": "Capturado: ",            
+            "data_captura": "Data Captura: ",
+            "localizacao": "Localizacao: ",
+            "imagem": "Imagem: "
+        }

@@ -26,7 +26,8 @@
             </thead>
 <tbody>
     {% for inimigo in inimigos %}
-        <tr>
+    <img src="media/{{ inimigo.imagem }}" alt="">
+    <tr>
             <td>{{ inimigo.nome_inimigo }}</td>
             <td>{{ inimigo.sexo }}</td>
             <td>{{ inimigo.super_poder }}</td>

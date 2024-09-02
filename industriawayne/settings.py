@@ -61,10 +61,7 @@ TEMPLATES = [
         'DIRS': [os.path.join(BASE_DIR,'base_templates'), 
                  os.path.join(BASE_DIR,'base_static'),
                 ],
-        # 'DIRS': [
-        #     BASE_DIR/'base_templates',
-        #     BASE_DIR/'base_static',
-        # ],
+
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -133,7 +130,13 @@ STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
-MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR.joinpath("media")
+MEDIA_URL = 'gerenciador_industriawayne/templates/gerenciador_industriawayne/media/'
+MEDIA_ROOT = 'gerenciador_industriawayne/templates/gerenciador_industriawayne/media/'
+
+# MEDIA_ROOT= os.path.join(BASE_DIR, 'media')
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
