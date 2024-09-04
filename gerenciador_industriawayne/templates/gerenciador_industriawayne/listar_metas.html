@@ -1,0 +1,38 @@
+{% extends 'gerenciador_industriawayne/base.html' %}
+
+{% block title %}Lista de Inimigos{% endblock %}
+
+{% block content %}
+<h1>Lista de Metas</h1>
+
+{% if metas %}
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nome da Meta</th>
+                    <th>Responsável</th>
+                    <th>Editar</th>
+                    <th>Remover</th>
+                   
+                </tr>
+            </thead>
+<tbody>
+    {% for meta in metas %}
+    <img src="media/{{ inimigo.imagem }}" alt="">
+    <tr>
+            <td>{{ meta.nome_meta }}</td>
+            <td>{{ meta.responsavel }}</td> 
+           
+        </tr>
+    {% endfor %}
+</tbody>
+        </table>
+</div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            Nenhuma meta cadastrada.
+        </div>
+    {% endif %}
+{% endblock %}
+

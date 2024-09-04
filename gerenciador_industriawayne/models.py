@@ -10,6 +10,7 @@ class Equipamentos(models.Model):
     status = models.CharField(max_length=50)
     localizacao = models.CharField(max_length=50, default=None)
     # imagem = models.ImageField(upload_to="static/gerenciador_industriawayne/css/images", null = True, blank=True)
+    imagem = models.ImageField(upload_to= "images/", null = True, blank=True)
 
 class Inimigos(models.Model):
     id = models.AutoField(primary_key=True)
@@ -26,3 +27,7 @@ class Inimigos(models.Model):
     imagem = models.ImageField(upload_to= "images/", null = True, blank=True)
 
 
+class Metas(models.Model):
+    id = models.AutoField(primary_key=True)
+    nome_meta = models.CharField(max_length=100, default=None)
+    responsavel = models.CharField(max_length=100, default=None)

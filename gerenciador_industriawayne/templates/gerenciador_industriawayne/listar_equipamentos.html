@@ -17,6 +17,7 @@
                     <th>Usuário atual:</th>
                     <th>Status</th> 
                     <th>Localização</th>
+                    <th>Imagem</th>
                     <th>Editar</th>
                     <th>Remover</th>
                     <!-- <th>Imagem</th> -->
@@ -31,6 +32,11 @@
             <td>{{ equipamento.usuario_atual }}</td>
             <td>{{ equipamento.status }}</td>
             <td>{{ equipamento.localizacao }}</td> 
+            {% if user.image %}
+            <td> <img src="{{ equipamento.imagem.url }}"> </td>
+            {% else %}
+            <td></td>
+            {% endif %}
             <td><a href="{% url 'editar_equipamento' equipamento.pk %}" class="btn btn-warning btn-sm">Editar</a>  </td>              
             <td><a href="{% url 'remover_equipamento' equipamento.id %}" class="btn btn-danger btn-sm">Remover</a> </td>
         </tr>

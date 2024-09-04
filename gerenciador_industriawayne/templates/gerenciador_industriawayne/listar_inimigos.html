@@ -4,7 +4,7 @@
 
 {% block content %}
 <h1>Lista de Inimigos</h1>
-    
+
 {% if inimigos %}
     <div class="table-responsive">
         <table class="table table-bordered table-striped">
@@ -19,6 +19,7 @@
                     <th>Capturado</th>
                     <th>Data de Captura</th>
                     <th>Localização</th>
+                    <th>Imagem</th>
                     <th>Editar</th>
                     <th>Remover</th>
                     <!-- <th>Imagem</th> -->
@@ -36,7 +37,12 @@
             <td>{{ inimigo.descricao }}</td>
             <td>{{ inimigo.capturado }}</td> 
             <td>{{ inimigo.data_captura }}</td>
-            <td>{{ inimigo.localizacao }}</td>    
+            <td>{{ inimigo.localizacao }}</td>  
+            {% if inimigo.imagem %}
+            <td> <img src="{{ inimigo.imagem.url }}"> </td>
+            {% else %}
+            <td></td>
+            {% endif %}  
             <td><a href="{% url 'editar_inimigo' inimigo.pk %}" class="btn btn-warning btn-sm">Editar</a>  </td>              
             <td><a href="{% url 'remover_inimigo' inimigo.id %}" class="btn btn-danger btn-sm">Remover</a> </td>                
         </tr>
