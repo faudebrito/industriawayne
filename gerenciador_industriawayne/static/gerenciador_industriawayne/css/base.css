@@ -13,6 +13,11 @@ body {
     
 }
 
+.wrapper {
+   display:flex;
+   flex-direction: column;
+}
+
 .navbar {
     background-color: #343a40; /* Cinza escuro */
 }
@@ -22,9 +27,9 @@ body {
 }
 
 .container{
-    margin-top: 80px;
+    margin-top: 20px;
     margin-bottom: 20px;
-    height: 700px;
+    height: 760px;
 
 }
 
@@ -34,6 +39,7 @@ footer {
     color: #FFFF00; /* Branco */
     padding: 80px;
     height: 20px;
+    position:sticky;
 }
 
 footer p {
@@ -57,6 +63,7 @@ label {
 
 .table-responsive h2{
     color: #FFFF00;
+    
 }
 
 .alert {
@@ -78,3 +85,4 @@ table img {
     width:100px;
     height: 100px;
 }
+

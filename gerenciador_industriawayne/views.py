@@ -8,6 +8,7 @@ from .forms import InimigosForms
 from .forms import EquipamentosForms
 from .forms import MetasForms
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 def home(request):
     return render(request, 'gerenciador_industriawayne/home.html')
@@ -55,7 +56,10 @@ def cadastrar_inimigos(request):
 @login_required(login_url='/login/login')
 def listar_inimigos(request):
     inimigos = Inimigos.objects.all()  # Recupera todos os equipamentos do banco de dados
-    return render(request, 'gerenciador_industriawayne/listar_inimigos.html', {'inimigos': inimigos})
+    paginator = Paginator(inimigos, 3)
+    page_number = request.GET.get('page')  # Captura o número da página na URL
+    page_obj = paginator.get_page(page_number)		
+    return render(request, 'gerenciador_industriawayne/listar_inimigos.html', {'inimigos': inimigos, 'page_obj': page_obj})
 
 class editar_inimigo(UpdateView):
     model = Inimigos

@@ -26,29 +26,49 @@
                 </tr>
             </thead>
 <tbody>
-    {% for inimigo in inimigos %}
-    <img src="media/{{ inimigo.imagem }}" alt="">
+    
+    {% for item in page_obj %}
+    <img src="media/{{ item.imagem }}" alt="">
     <tr>
-            <td>{{ inimigo.nome_inimigo }}</td>
-            <td>{{ inimigo.sexo }}</td>
-            <td>{{ inimigo.super_poder }}</td>
-            <td>{{ inimigo.armas }}</td>
-            <td>{{ inimigo.grau_de_perigo }}</td>
-            <td>{{ inimigo.descricao }}</td>
-            <td>{{ inimigo.capturado }}</td> 
-            <td>{{ inimigo.data_captura }}</td>
-            <td>{{ inimigo.localizacao }}</td>  
-            {% if inimigo.imagem %}
-            <td> <img src="{{ inimigo.imagem.url }}"> </td>
+            <td>{{ item.nome_inimigo }}</td>
+            <td>{{ item.sexo }}</td>
+            <td>{{ item.super_poder }}</td>
+            <td>{{ item.armas }}</td>
+            <td>{{ item.grau_de_perigo }}</td>
+            <td>{{ item.descricao }}</td>
+            <td>{{ item.capturado }}</td> 
+            <td>{{ item.data_captura }}</td>
+            <td>{{ item.localizacao }}</td>  
+            {% if item.imagem %}
+            <td> <img src="{{ item.imagem.url }}"> </td>
             {% else %}
             <td></td>
             {% endif %}  
-            <td><a href="{% url 'editar_inimigo' inimigo.pk %}" class="btn btn-warning btn-sm">Editar</a>  </td>              
-            <td><a href="{% url 'remover_inimigo' inimigo.id %}" class="btn btn-danger btn-sm">Remover</a> </td>                
+            <td><a href="{% url 'editar_inimigo' item.pk %}" class="btn btn-warning btn-sm">Editar</a>  </td>              
+            <td><a href="{% url 'remover_inimigo' item.id %}" class="btn btn-danger btn-sm">Remover</a> </td>                
         </tr>
     {% endfor %}
 </tbody>
         </table>
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; primeira</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">anterior</a>
+                {% endif %}
+        
+                <span class="current">
+                    Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                </span>
+        
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">próxima</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">última &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+
+
 </div>
     {% else %}
         <div class="alert alert-info" role="alert">
