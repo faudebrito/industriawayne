@@ -1,6 +1,6 @@
 {% extends 'gerenciador_industriawayne/base.html' %}
 
-{% block title %}Lista de Inimigos{% endblock %}
+{% block title %}Lista de Metas{% endblock %}
 
 {% block content %}
 <h1>Lista de Metas</h1>
@@ -12,18 +12,23 @@
                 <tr>
                     <th>Nome da Meta</th>
                     <th>Responsável</th>
+                    <th>Descrição</th>
+                    <th>Data Prazo</th>
+                    <th>Status</th>
                     <th>Editar</th>
                     <th>Remover</th>
-                   
                 </tr>
             </thead>
 <tbody>
     {% for meta in metas %}
-    <img src="media/{{ inimigo.imagem }}" alt="">
-    <tr>
+        <tr>
             <td>{{ meta.nome_meta }}</td>
             <td>{{ meta.responsavel }}</td> 
-           
+            <td>{{ meta.descricao }}</td> 
+            <td>{{ meta.data_prazo }}</td> 
+            <td>{{ meta.status }}</td> 
+            <td><a href="{% url 'editar_meta' meta.pk %}" class="btn btn-warning btn-sm">Editar</a>  </td>              
+            <td><a href="{% url 'remover_meta' meta.id %}" class="btn btn-danger btn-sm">Remover</a> </td>
         </tr>
     {% endfor %}
 </tbody>
@@ -35,4 +40,3 @@
         </div>
     {% endif %}
 {% endblock %}
-

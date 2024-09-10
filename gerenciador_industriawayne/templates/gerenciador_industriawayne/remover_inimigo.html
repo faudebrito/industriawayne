@@ -4,7 +4,7 @@
 
 {% block content %}
     <h1>Remover Inimigo</h1>
-    <p>Tem certeza de que deseja remover o inimigo "{{ inimigo.nome }}"?</p>
+    <p>Tem certeza de que deseja remover o inimigo? {{ inimigo.nome }}"?</p>
     
     <form method="post">
         {% csrf_token %}

@@ -18,6 +18,7 @@ def cadastrar_equipamento(request):
     form = EquipamentosForms(request.POST, request.FILES)
     if form.is_valid():
         form.save()
+        messages.success(request, 'Equipamento Cadastrado com sucesso!')
     return render(request, 'gerenciador_industriawayne/cadastrar_equipamento.html', {'form': form})
 
 @login_required(login_url='/login/login')
@@ -86,9 +87,31 @@ def cadastrar_meta(request):
     form = MetasForms(request.POST, request.FILES)
     if form.is_valid():
         form.save()
+        messages.success(request, 'Meta Cadastrada com sucesso!')
     return render(request, 'gerenciador_industriawayne/cadastrar_metas.html', {'form': form})
 
 @login_required(login_url='/login/login')
 def listar_metas(request):
     metas = Metas.objects.all()  # Recupera todos os equipamentos do banco de dados
     return render(request, 'gerenciador_industriawayne/listar_metas.html', {'metas': metas})
+
+
+class editar_meta(UpdateView):
+    model = Metas
+    fields = ['nome_meta', 'responsavel', 'descricao', 'data_prazo','status']
+    template_name = 'gerenciador_industriawayne/editar_meta.html'
+    success_url = reverse_lazy('listar_metas')  # Redireciona para a lista após edição
+
+    def form_valid(self, form):
+        # messages.success(self.request, 'Meta atualizada com sucesso!')
+        return super().form_valid(form)
+
+@login_required(login_url='/login/login')
+def remover_meta(request, meta_id):
+    meta = get_object_or_404(Metas, id=meta_id)
+    
+    if request.method == 'POST':
+        meta.delete()
+        return redirect('listar_metas')  # Redireciona para a lista de metas após exclusão
+    
+    return render(request, 'gerenciador_industriawayne/remover_meta.html', {'meta': meta})

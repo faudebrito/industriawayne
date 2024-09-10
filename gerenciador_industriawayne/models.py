@@ -12,6 +12,10 @@ class Equipamentos(models.Model):
     # imagem = models.ImageField(upload_to="static/gerenciador_industriawayne/css/images", null = True, blank=True)
     imagem = models.ImageField(upload_to= "images/", null = True, blank=True)
 
+    class Meta:
+        verbose_name = 'Equipamento'
+        verbose_name_plural = 'Equipamentos'
+
 class Inimigos(models.Model):
     id = models.AutoField(primary_key=True)
     nome_inimigo = models.CharField(max_length=100, default=None)
@@ -26,8 +30,19 @@ class Inimigos(models.Model):
     # imagem = models.ImageField(upload_to="static/gerenciador_industriawayne/css/images", null = True, blank=True)
     imagem = models.ImageField(upload_to= "images/", null = True, blank=True)
 
+    class Meta:
+        verbose_name = 'Inimigo'
+        verbose_name_plural = 'Inimigos'
+
 
 class Metas(models.Model):
     id = models.AutoField(primary_key=True)
     nome_meta = models.CharField(max_length=100, default=None)
     responsavel = models.CharField(max_length=100, default=None)
+    descricao = models.CharField(max_length=500, default=None)
+    data_prazo = models.DateField(default=datetime.datetime.now)
+    status = models.CharField(max_length=50, default=None)
+
+    class Meta:
+        verbose_name = 'Meta'
+        verbose_name_plural = 'Metas'

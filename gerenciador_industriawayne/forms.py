@@ -60,9 +60,15 @@ class MetasForms(forms.ModelForm):
         fields=(
             "nome_meta",
             "responsavel",
+            "descricao",
+            "data_prazo",
+            "status",
          )
 
         labels = {
             "nome_meta": "Meta ",
-            "responsavel": "Responsavel ",
+            "responsavel": "Responsável ",
+            "descricao": "Descrição ",
+            "data_prazo": "Data Prazo ",
+            "status": "Status ",
         }

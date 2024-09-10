@@ -1,78 +1,149 @@
-{% extends 'gerenciador_industriawayne/base.html' %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Listar Inimigos{% endblock %}</title>
+    <!-- Incluindo o Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    {%load static %}
+    <link rel="stylesheet" href='{% static 'gerenciador_industriawayne/css/base.css' %}?{% now "U" %}'>
+</head>
+<body>
+    <div class="wrapper">
 
-{% block title %}Lista de Inimigos{% endblock %}
+        <!-- Cabeçalho -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'home' %}">Home</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'listar_equipamentos' %}">Equipamentos</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'cadastrar_equipamento' %}">Cadastro de equipamentos</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'listar_inimigos' %}">Inimigos</a>
+                        </li>
 
-{% block content %}
-<h1>Lista de Inimigos</h1>
+                        <li class="nav-item">
+                        <a class="nav-link" href="{% url 'cadastrar_inimigos' %}">Cadastro de inimigos</a>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'cadastrar_metas' %}">Cadastro de metas</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'listar_metas' %}">Listar metas</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'cadastro' %}">Cadastro de Usuário</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
-{% if inimigos %}
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped">
-            <thead class="table-dark">
-                <tr>
-                    <th>Nome do inimigo</th>
-                    <th>Sexo</th>
-                    <th>Super poder</th>
-                    <th>Armas</th>
-                    <th>Grau de perigo</th>
-                    <th>Descrição</th>
-                    <th>Capturado</th>
-                    <th>Data de Captura</th>
-                    <th>Localização</th>
-                    <th>Imagem</th>
-                    <th>Editar</th>
-                    <th>Remover</th>
-                    <!-- <th>Imagem</th> -->
+    <!-- Conteúdo Principal -->
+    <div class="container">
+
+        {% block content %}
+        <h1>Lista de Inimigos</h1>
+
+        {% if inimigos %}
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Nome do inimigo</th>
+                            <th>Sexo</th>
+                            <th>Super poder</th>
+                            <th>Armas</th>
+                            <th>Grau de perigo</th>
+                            <th>Descrição</th>
+                            <th>Capturado</th>
+                            <th>Data de Captura</th>
+                            <th>Localização</th>
+                            <th>Imagem</th>
+                            <th>Editar</th>
+                            <th>Remover</th>
+                            <!-- <th>Imagem</th> -->
+                        </tr>
+                    </thead>
+        <tbody>
+            
+            {% for item in page_obj %}
+            <img src="media/{{ item.imagem }}" alt="">
+            <tr>
+                    <td>{{ item.nome_inimigo }}</td>
+                    <td>{{ item.sexo }}</td>
+                    <td>{{ item.super_poder }}</td>
+                    <td>{{ item.armas }}</td>
+                    <td>{{ item.grau_de_perigo }}</td>
+                    <td>{{ item.descricao }}</td>
+                    <td>{{ item.capturado }}</td> 
+                    <td>{{ item.data_captura }}</td>
+                    <td>{{ item.localizacao }}</td>  
+                    {% if item.imagem %}
+                    <td> <img src="{{ item.imagem.url }}"> </td>
+                    {% else %}
+                    <td></td>
+                    {% endif %}  
+                    <td><a href="{% url 'editar_inimigo' item.pk %}" class="btn btn-warning btn-sm">Editar</a>  </td>              
+                    <td><a href="{% url 'remover_inimigo' item.id %}" class="btn btn-danger btn-sm">Remover</a> </td>                
                 </tr>
-            </thead>
-<tbody>
-    
-    {% for item in page_obj %}
-    <img src="media/{{ item.imagem }}" alt="">
-    <tr>
-            <td>{{ item.nome_inimigo }}</td>
-            <td>{{ item.sexo }}</td>
-            <td>{{ item.super_poder }}</td>
-            <td>{{ item.armas }}</td>
-            <td>{{ item.grau_de_perigo }}</td>
-            <td>{{ item.descricao }}</td>
-            <td>{{ item.capturado }}</td> 
-            <td>{{ item.data_captura }}</td>
-            <td>{{ item.localizacao }}</td>  
-            {% if item.imagem %}
-            <td> <img src="{{ item.imagem.url }}"> </td>
-            {% else %}
-            <td></td>
-            {% endif %}  
-            <td><a href="{% url 'editar_inimigo' item.pk %}" class="btn btn-warning btn-sm">Editar</a>  </td>              
-            <td><a href="{% url 'remover_inimigo' item.id %}" class="btn btn-danger btn-sm">Remover</a> </td>                
-        </tr>
-    {% endfor %}
-</tbody>
-        </table>
-        <div class="pagination">
-            <span class="step-links">
-                {% if page_obj.has_previous %}
-                    <a href="?page=1">&laquo; primeira</a>
-                    <a href="?page={{ page_obj.previous_page_number }}">anterior</a>
-                {% endif %}
-        
-                <span class="current">
-                    Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
-                </span>
-        
-                {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">próxima</a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}">última &raquo;</a>
-                {% endif %}
-            </span>
-        </div>
+            {% endfor %}
+        </tbody>
+                </table>
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                            <a href="?page=1">&laquo; primeira</a>
+                            <a href="?page={{ page_obj.previous_page_number }}">anterior</a>
+                        {% endif %}
+                
+                        <span class="current">
+                            Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                        </span>
+                
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}">próxima</a>
+                            <a href="?page={{ page_obj.paginator.num_pages }}">última &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
 
-
-</div>
+    </div>
     {% else %}
         <div class="alert alert-info" role="alert">
             Nenhum inimigo cadastrado.
         </div>
     {% endif %}
-{% endblock %}
+    {% endblock %}
+        
+    <!-- Rodapé -->
+    <footer class="bg-dark text-white text-center py-4 mt-auto">
+        <p>&copy; 2024 - Flávia Brito Corporation. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Incluindo o Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
