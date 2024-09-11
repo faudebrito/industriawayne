@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from .models import Equipamentos, Inimigos, Metas
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.urls import reverse_lazy
 from django.views.generic.edit import UpdateView
 from .forms import InimigosForms
@@ -12,8 +12,8 @@ from django.core.paginator import Paginator
 
 def home(request):
     return render(request, 'gerenciador_industriawayne/home.html')
-
 @login_required(login_url='/login/login')
+@permission_required('gerenciador_industriawayne.add_equipamentos', raise_exception=True)
 def cadastrar_equipamento(request):
     form = EquipamentosForms(request.POST, request.FILES)
     if form.is_valid():
@@ -22,6 +22,10 @@ def cadastrar_equipamento(request):
     return render(request, 'gerenciador_industriawayne/cadastrar_equipamento.html', {'form': form})
 
 @login_required(login_url='/login/login')
+
+
+@permission_required('gerenciador_industriawayne.view_equipamentos', raise_exception=True)
+@permission_required('gerenciador_industriawayne.change_equipamentos', raise_exception=True)
 def listar_equipamentos(request):
     equipamentos = Equipamentos.objects.all()  # Recupera todos os equipamentos do banco de dados
     return render(request, 'gerenciador_industriawayne/listar_equipamentos.html', {'equipamentos': equipamentos})

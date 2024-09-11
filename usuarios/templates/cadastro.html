@@ -30,6 +30,14 @@
             <input type="password" placeholder="senha: " name="senha">
             <br>
             <br>
+            <label> Grupo: </label>
+            <select name="grupo" id="">
+                {% for  grupo in grupos %}
+                <option value="{{grupo.name}}">{{grupo.name}}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <br>
             
             <input type="submit" value="Cadastrar">
             <br>

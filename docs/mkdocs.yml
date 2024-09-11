@@ -1,0 +1,20 @@
+site_name: 'Indústria Wayne'
+site_description: 'Documentação oficial do sistema de gestão da Indústria Wayne criado a pedido da Infinity School para obtenção do certificado de DEV FULL STACK'
+site_author: 'Flávia Neves Nou de Brito'
+repo_url: 'https://github.com/faudebrito/industriawayne'
+
+theme:
+  name: 'mkdocs'
+
+nav:
+  - Início: index.md
+  - Instalação: instalacao.md
+  - Models: models.md
+  - Views: views.md
+  - Templates: templates.md
+ 
+
+markdown_extensions:
+  - toc:
+      permalink: true
+
