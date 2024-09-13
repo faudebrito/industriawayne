@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Meu Site{% endblock %}</title>
+    <title>{% block title %}Listar Usuários Cadastrados{% endblock %}</title>
     <!-- Incluindo o Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     {%load static %}
@@ -35,23 +35,24 @@
 
                         <li class="nav-item">
                         <a class="nav-link" href="{% url 'cadastrar_inimigos' %}">Cadastro de inimigos</a>
+                        </li>
                         
                         <li class="nav-item"></li>
-                            <a class="nav-link" href="{% url 'listar_metas' %}">Metas</a>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'cadastrar_metas' %}">Cadastro de metas</a>
+                        <a class="nav-link" href="{% url 'listar_metas' %}">Metas</a>
                         </li>
                     
+                        <li class="nav-item">
+                        <a class="nav-link" href="{% url 'cadastrar_metas' %}">Cadastro de metas</a>
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'cadastro' %}">Cadastro de Usuário</a>
                         </li>
 
                         <li class="nav-item"></li>
-                        <a class="nav-link" href="{% url 'listar_usuarios' %}">Usuários Cadastrados</a>
+                            <a class="nav-link" href="{% url 'listar_usuarios' %}">Usuários Cadastrados</a>
                         </li>
-                        
+
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'login' %}">Login</a>
                         </li>
@@ -64,21 +65,66 @@
                 </div>
             </div>
         </nav>
-        
-        <!-- Conteúdo Principal -->
-        <div class="container">
-            {% block content %}
+
+    <!-- Conteúdo Principal -->
+    <div class="container">
+
+        {% block content %}
+        <h2>Usuários Cadastrados no Sistema</h2>
+
+        {% if usuarios %}
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Usuário</th>
+                            <th>E-mail</th>
+                            <th>Grupo</th>
+                        </tr>
+                    </thead>
+        <tbody>
             
-            {% endblock %}
-        </div>
-        
-        <!-- Rodapé -->
-        <footer class="bg-dark text-white text-center py-4 mt-auto">
-            <p>&copy; 2024 - Flávia Brito Corporation. Todos os direitos reservados.</p>
-        </footer>
-        
-        <!-- Incluindo o Bootstrap JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            {% for item in page_obj %}
+                <tr>
+                    <td>{{ item.username }}</td>
+                    <td>{{ item.email }}</td>
+                    <td>{{ item.grupo }}</td>               
+                </tr>
+            {% endfor %}
+        </tbody>
+                </table>
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if page_obj.has_previous %}
+                            <a href="?page=1">&laquo; primeira</a>
+                            <a href="?page={{ page_obj.previous_page_number }}">anterior</a>
+                        {% endif %}
+                
+                        <span class="current">
+                            Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                        </span>
+                
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}">próxima</a>
+                            <a href="?page={{ page_obj.paginator.num_pages }}">última &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+
     </div>
-    </body>
+        {% else %}
+        <div class="alert alert-info" role="alert">
+            Nenhum Usuário cadastrado.
+        </div>
+        {% endif %}
+    {% endblock %}
+        
+    <!-- Rodapé -->
+    <footer class="bg-dark text-white text-center py-4 mt-auto">
+        <p>&copy; 2024 - Flávia Brito Corporation. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Incluindo o Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

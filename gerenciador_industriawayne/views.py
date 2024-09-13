@@ -22,9 +22,6 @@ def cadastrar_equipamento(request):
     return render(request, 'gerenciador_industriawayne/cadastrar_equipamento.html', {'form': form})
 
 @login_required(login_url='/login/login')
-
-
-@permission_required('gerenciador_industriawayne.view_equipamentos', raise_exception=True)
 @permission_required('gerenciador_industriawayne.change_equipamentos', raise_exception=True)
 def listar_equipamentos(request):
     equipamentos = Equipamentos.objects.all()  # Recupera todos os equipamentos do banco de dados
@@ -41,6 +38,7 @@ class editar_equipamento(UpdateView):
         return super().form_valid(form)
     
 @login_required(login_url='/login/login')
+@permission_required('gerenciador_industriawayne.view_equipamentos', raise_exception=True)
 def remover_equipamento(request, equipamento_id):
     equipamento = get_object_or_404(Equipamentos, id=equipamento_id)
     
@@ -51,6 +49,7 @@ def remover_equipamento(request, equipamento_id):
     return render(request, 'gerenciador_industriawayne/remover_equipamento.html', {'equipamento': equipamento})
 
 @login_required(login_url='/login/login')
+@permission_required('gerenciador_industriawayne.view_equipamentos', raise_exception=True)
 def cadastrar_inimigos(request):
     form = InimigosForms(request.POST, request.FILES)
     if form.is_valid():
@@ -66,6 +65,7 @@ def listar_inimigos(request):
     page_obj = paginator.get_page(page_number)		
     return render(request, 'gerenciador_industriawayne/listar_inimigos.html', {'inimigos': inimigos, 'page_obj': page_obj})
 
+@permission_required('gerenciador_industriawayne.view_equipamentos', raise_exception=True)
 class editar_inimigo(UpdateView):
     model = Inimigos
     fields = ['nome_inimigo', 'sexo', 'super_poder', 'armas', 'grau_de_perigo', 'descricao', 'capturado','data_captura','localizacao', 'imagem']
@@ -77,6 +77,7 @@ class editar_inimigo(UpdateView):
         return super().form_valid(form)
 
 @login_required(login_url='/login/login')
+@permission_required('gerenciador_industriawayne.view_equipamentos', raise_exception=True)
 def remover_inimigo(request, inimigo_id):
     inimigo = get_object_or_404(Inimigos, id=inimigo_id)
     
@@ -87,6 +88,7 @@ def remover_inimigo(request, inimigo_id):
     return render(request, 'gerenciador_industriawayne/remover_inimigo.html', {'inimigo': inimigo})
 
 @login_required(login_url='/login/login')
+@permission_required('gerenciador_industriawayne.view_equipamentos', raise_exception=True)
 def cadastrar_meta(request):
     form = MetasForms(request.POST, request.FILES)
     if form.is_valid():
@@ -99,7 +101,7 @@ def listar_metas(request):
     metas = Metas.objects.all()  # Recupera todos os equipamentos do banco de dados
     return render(request, 'gerenciador_industriawayne/listar_metas.html', {'metas': metas})
 
-
+@permission_required('gerenciador_industriawayne.view_equipamentos', raise_exception=True)
 class editar_meta(UpdateView):
     model = Metas
     fields = ['nome_meta', 'responsavel', 'descricao', 'data_prazo','status']
@@ -111,6 +113,7 @@ class editar_meta(UpdateView):
         return super().form_valid(form)
 
 @login_required(login_url='/login/login')
+@permission_required('gerenciador_industriawayne.view_equipamentos', raise_exception=True)
 def remover_meta(request, meta_id):
     meta = get_object_or_404(Metas, id=meta_id)
     

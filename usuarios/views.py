@@ -4,10 +4,11 @@ from django.contrib.auth.models import User as User_contrib_auth
 from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth import login as login_django
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
 
 @login_required(login_url="login")
+@permission_required('gerenciador_industriawayne.view_equipamentos', raise_exception=True)
 def cadastro(request):
 
     if request.method == 'GET':
@@ -61,11 +62,14 @@ def logout_view(request):
     messages.success(request, 'Logout realizado com sucesso!')
     return render(request, 'alerta-usuario.html')
 
-def listar_grupo(request):
+@login_required(login_url='/login/login')
+@permission_required('gerenciador_industriawayne.view_equipamentos', raise_exception=True)
+def listar_grupos(request):
     grupos = Group.objects.all()  # Busca todos os grupos
     return render(request, 'cadastro.html', {'grupos': grupos})
 
-# @login_required(login_url='/login/login')
-# def listar_usuarios(request):
-#     usuarios = User_contrib_auth.objects.all()  # Recupera todos os equipamentos do banco de dados
-#     return render(request, 'gerenciador_industriawayne/listar_metas.html', {'metas': metas})
+@login_required(login_url='/login/login')
+@permission_required('gerenciador_industriawayne.view_equipamentos', raise_exception=True)
+def listar_usuarios(request):
+    usuarios = User_contrib_auth.objects.all()  # Recupera todos os equipamentos do banco de dados
+    return render(request, 'listar_usuarios.html', {'usuarios': usuarios})
