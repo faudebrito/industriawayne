@@ -35,7 +35,11 @@ def listar_equipamentos(request):
     
     else:
         equipamentos = Equipamentos.objects.all()  # Recupera todos os equipamentos do banco de dados
-        return render(request, 'gerenciador_industriawayne/listar_equipamentos.html', {'equipamentos': equipamentos})
+        paginator = Paginator(equipamentos, 6)
+        page_number = request.GET.get('page')  # Captura o número da página na URL
+        page_obj = paginator.get_page(page_number)		
+        # Recupera todos os equipamentos do banco de dados
+        return render(request, 'gerenciador_industriawayne/listar_equipamentos.html', {'equipamentos': equipamentos, 'page_obj': page_obj})
 
 class editar_equipamento(UpdateView):
     model = Equipamentos
@@ -55,7 +59,6 @@ def remover_equipamento(request, equipamento_id):
         return redirect('home')
     else:
         equipamento = get_object_or_404(Equipamentos, id=equipamento_id)
-    
         if request.method == 'POST':
             equipamento.delete()
             return redirect('listar_equipamentos')  # Redireciona para a lista de equipamentos após exclusão
@@ -82,7 +85,7 @@ def listar_inimigos(request):
         messages.error(request, 'Você não tem permissão para acessar esta página.')
         return redirect('home')
     else:
-        inimigos = Inimigos.objects.all()  # Recupera todos os equipamentos do banco de dados
+        inimigos = Inimigos.objects.all()  # Recupera todos os inimigos do banco de dados
         paginator = Paginator(inimigos, 3)
         page_number = request.GET.get('page')  # Captura o número da página na URL
         page_obj = paginator.get_page(page_number)		
