@@ -1,5 +1,5 @@
 # industriawayne
-Projeto final do curso de DED FULL STACK da Infinity School
+Projeto final do curso de DEV FULL STACK da Infinity School
 
 As Indústrias Wayne, uma empresa renomada e inovadora liderada pelo lendário Bruce Wayne (também conhecido como Batman), está buscando uma solução tecnológica para otimizar seus processos internos e melhorar a segurança de Gotham City. Como parte de seu projeto final, você irá desenvolver uma aplicação web full stack que atenda às necessidades específicas das Indústrias Wayne. Descrição do Projeto: Sua missão é criar uma plataforma que aborde os requisitos que são abordados na próxima página do arquivo.
 
@@ -29,4 +29,3 @@ Apresente um protótipo funcional da aplicação, incluindo código fonte e docu
 
 Certifique-se de demonstrar a integração eficaz entre o frontend e o backend, bem como a implementação dos requisitos mencionados acima.
 
-Use todo e qualquer conhecimento adquirido até aqui. Este projeto final, além de ser a sua avaliação, também lhe serve como um bom portfólio.

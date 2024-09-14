@@ -18,9 +18,9 @@ urlpatterns = [
     path('equipamentos/editar/<int:pk>/', views.editar_equipamento.as_view(), name='editar_equipamento'),
     path('inimigos/', views.listar_inimigos, name='listar_inimigos'),
     path('inimigos/remover/<int:inimigo_id>/', views.remover_inimigo, name='remover_inimigo'),
-    path('inimigos/editar/<int:pk>/', views.editar_inimigo, name='editar_inimigo'),
+    path('inimigos/editar/<int:pk>/', views.editar_inimigo.as_view(), name='editar_inimigo'),
     path('metas/', views.listar_metas, name='listar_metas'),
     path('metas/remover/<int:meta_id>/', views.remover_meta, name='remover_meta'),
-    path('metas/editar/<int:pk>/', views.editar_meta, name='editar_meta'),
+    path('metas/editar/<int:pk>/', views.editar_meta.as_view(), name='editar_meta'),
     
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

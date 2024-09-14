@@ -15,8 +15,18 @@
 
         <form action="{% url 'cadastro' %}" method="POST" >{% csrf_token %}
 
-            <label> Nome do usuário: </label>
+            <label> Login: </label>
             <input type="text" placeholder="username: " name="username">
+            <br>
+            <br>
+
+            <label> Prenome: </label>
+            <input type="text" placeholder="Prenome: " name="first_name">
+            <br>
+            <br>
+
+            <label> Sobrenome: </label>
+            <input type="text" placeholder="Sobrenome: " name="last_name">
             <br>
             <br>
 
@@ -38,7 +48,7 @@
             </select>
             <br>
             <br>
-            
+
             <input type="submit" value="Cadastrar">
             <br>
             <br>

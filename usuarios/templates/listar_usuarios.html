@@ -78,8 +78,13 @@
                     <thead class="table-dark">
                         <tr>
                             <th>Usuário</th>
+                            <th>Prenome</th>
+                            <th>Sobrenome</th>
                             <th>E-mail</th>
+                            <th>Data Cadastro</th>
+                            <th>Último login</th>
                             <th>Grupo</th>
+
                         </tr>
                     </thead>
         <tbody>
@@ -87,8 +92,16 @@
             {% for item in page_obj %}
                 <tr>
                     <td>{{ item.username }}</td>
+                    <td>{{ item.first_name }}</td>
+                    <td>{{ item.last_name }}</td>
                     <td>{{ item.email }}</td>
-                    <td>{{ item.grupo }}</td>               
+                    <td>{{ item.date_joined }}</td>
+                    <td>{{ item.last_login }}</td>   
+                    {% for group in item.groups.all %}
+                    <td>{{ group.name }}</td>
+                    {% endfor %} 
+                    
+
                 </tr>
             {% endfor %}
         </tbody>
